@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>📸 Our Memories</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-glow">
+
+<main class="center-wrap">
+  <section class="card wide">
+
+    <h1 class="title">Okay… now the cute part 😳❤️</h1>
+    <p class="subtitle">Our memories together ✨</p>
+
+    <!-- MUSIC PLAYER -->
+    <div class="audio-box">
+      <button class="btn btn-play" id="playBtn">
+        ▶ Play Music
+      </button>
+      <span class="tiny-hint" id="audioStatus"></span>
+
+      <!-- IMPORTANT: change filename if your song name is different -->
+      <audio id="bgMusic" loop>
+        <source src="assets/music/music.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <!-- PHOTO GRID -->
+    <div class="photo-grid">
+
+      <!-- Replace filenames with YOUR actual photo names -->
+      <figure class="photo">
+        <img src="assets/photos/image1_.JPG" alt="Memory 1">
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/photos/image2_.JPG" alt="Memory 2">
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/photos/image3_.JPG" alt="Memory 3">
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/photos/image4_.JPG" alt="Memory 4">
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/photos/image5_.JPG" alt="Memory 5">
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/photos/image6_.JPG" alt="Memory 6">
+      </figure>
+
+      <figure class="photo">
+        <img src="assets/photos/image7_.JPG" alt="Memory 7">
+      </figure>
+      <!-- Add more photos by copying this block -->
+      <!--
+      <figure class="photo">
+        <img src="assets/photos/photo3.jpg">
+      </figure>
+      -->
+
+    </div>
+
+    <div class="footer-row">
+      <a class="btn btn-home" href="index.html">
+        Back to Beginning ❤️
+      </a>
+    </div>
+
+  </section>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
