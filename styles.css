@@ -1,0 +1,144 @@
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+img{max-width:100%;display:block}
+a{text-decoration:none}
+code{background:rgba(255,255,255,.5);padding:0 .35rem;border-radius:.35rem}
+
+.center-wrap{min-height:100%;display:grid;place-items:center;padding:22px}
+.card{
+  width:min(720px,94vw);
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(255,255,255,.65);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 16px 50px rgba(0,0,0,.18);
+  backdrop-filter:blur(10px);
+  position:relative;
+  overflow:hidden;
+}
+.card.wide{width:min(980px,95vw)}
+
+.title{margin:0 0 10px;font-size:clamp(28px,3.5vw,46px);letter-spacing:-.02em}
+.subtitle{margin:0 0 16px;opacity:.8}
+.message{
+  font-size:18px;line-height:1.55;margin:12px 0 16px;
+  padding:14px 16px;border-radius:16px;
+  background:rgba(255, 105, 180, .12);
+  border:1px solid rgba(255, 105, 180, .22);
+}
+
+/* ---- Cute Valentine backgrounds ---- */
+.bg-hearts, .bg-soft, .bg-glow{
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,105,180,.40), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(186,85,211,.25), transparent 55%),
+    radial-gradient(circle at 45% 90%, rgba(255,182,193,.40), transparent 55%),
+    linear-gradient(135deg, #fff0f6, #ffe9ff);
+  overflow:hidden;
+}
+.bg-soft{
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255,182,193,.40), transparent 45%),
+    radial-gradient(circle at 80% 75%, rgba(255,105,180,.25), transparent 55%),
+    linear-gradient(135deg, #fff5fb, #ffe7f7);
+}
+.bg-glow{
+  background:
+    radial-gradient(circle at 50% 15%, rgba(255,255,255,.60), transparent 55%),
+    radial-gradient(circle at 15% 75%, rgba(255,105,180,.28), transparent 50%),
+    radial-gradient(circle at 85% 70%, rgba(186,85,211,.22), transparent 55%),
+    linear-gradient(135deg, #ffeef9, #f4eaff);
+}
+
+/* Floating hearts (cute filler so pages don't look empty) */
+body::before{
+  content:"";
+  position:fixed;inset:-10%;
+  background-image:
+    radial-gradient(circle, rgba(255,105,180,.35) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(186,85,211,.25) 0 2px, transparent 3px);
+  background-size:60px 60px, 90px 90px;
+  background-position:0 0, 30px 30px;
+  filter:blur(.2px);
+  opacity:.55;
+  animation: floatBg 10s linear infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+@keyframes floatBg{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(60px)}
+}
+
+/* ---- Buttons ---- */
+.btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.btn{
+  border:0;cursor:pointer;font-weight:800;letter-spacing:.02em;
+  padding:12px 18px;border-radius:14px;
+  transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.btn:active{transform:translateY(1px) scale(.99)}
+
+.btn-yes{
+  color:#fff;
+  background:linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5);
+  box-shadow:0 12px 28px rgba(255,60,172,.25);
+  position:relative;overflow:hidden;
+}
+.btn-yes::before{
+  content:"";position:absolute;inset:-40%;
+  background:conic-gradient(from 0deg, rgba(255,255,255,0), rgba(255,255,255,.45), rgba(255,255,255,0));
+  animation: shimmer 2.3s linear infinite;
+}
+@keyframes shimmer{to{transform:rotate(360deg)}}
+.btn-yes:hover{filter:brightness(1.05);transform:translateY(-1px)}
+
+.btn-no{
+  color:#f2f2f2;
+  background:linear-gradient(135deg,#777,#444);
+  box-shadow:0 10px 20px rgba(0,0,0,.20);
+  opacity:.9;
+}
+.btn-no:hover{filter:brightness(.95);transform:translateY(-1px)}
+
+.footer-row{display:flex;justify-content:center;margin-top:16px}
+.btn-next{color:#fff;background:linear-gradient(135deg,#ff5f9e,#ff9966);box-shadow:0 12px 26px rgba(255,95,158,.22)}
+.btn-home{color:#222;background:rgba(255,255,255,.65);border:1px solid rgba(0,0,0,.08)}
+.btn-play{color:#fff;background:linear-gradient(135deg,#6a11cb,#2575fc);box-shadow:0 10px 22px rgba(37,117,252,.2)}
+
+/* ---- Meme grid (if you keep it in NO.html) ---- */
+.meme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:12px}
+.meme{margin:0;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.6);box-shadow:0 10px 22px rgba(0,0,0,.08)}
+.meme img{width:100%;height:240px;object-fit:cover}
+
+/* ---- Slideshow ---- */
+.slideshow{
+  width:min(860px,92vw);
+  height:min(520px,58vh);
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(255,255,255,.45);
+  box-shadow:0 16px 40px rgba(0,0,0,.12);
+  margin:14px auto 0;
+}
+.slide{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(1.02);
+  transition:opacity 1s ease, transform 1s ease;
+}
+.slide.active{opacity:1;transform:scale(1)}
+
+.slide-dots{
+  display:flex;gap:8px;justify-content:center;margin-top:12px
+}
+.dot{
+  width:10px;height:10px;border-radius:999px;
+  background:rgba(0,0,0,.18);
+}
+.dot.active{background:rgba(255,60,172,.6)}
