@@ -1,68 +1,62 @@
-// ---------- Fix NO button / hints (only if you still use noBtn as button) ----------
-(function(){
-  const noBtn = document.getElementById("noBtn");
-  const hint = document.getElementById("hint");
-  if(!noBtn) return;
+/* =========================================================
+   Valentine site scripts (FINAL)
+   - Gallery page: single video + optional background music
+   - NO page: autoplay music after clicking NO
+   ========================================================= */
 
-  const messages = [
-    "I'm sorry did you just click on NO 😭 Try again.",
-  ];
-  noBtn.addEventListener("click", () => {
-    if(hint) hint.textContent = messages[Math.floor(Math.random()*messages.length)];
-  });
-})();
+(function () {
+  // -------------------------
+  // GALLERY PAGE: video + music
+  // -------------------------
+  const reelVideo = document.getElementById("reelVideo");
+  const bgMusic = document.getElementById("bgMusic");
 
-// ---------- Start music reliably + slideshow ----------
-(function(){
-  const audio = document.getElementById("bgMusic");
   const playBtn = document.getElementById("playBtn");
-  const status = document.getElementById("audioStatus");
+  const status = document.getElementById("mediaStatus");
 
-  // Slideshow
-  const slides = Array.from(document.querySelectorAll(".slide"));
-  const dotsWrap = document.getElementById("dots");
+  // Run this block only on gallery.html (where reelVideo exists)
+  if (reelVideo || bgMusic) {
+    const playAll = async () => {
+      let videoOk = true;
+      let musicOk = true;
 
-  if (dotsWrap && slides.length) {
-    dotsWrap.innerHTML = slides.map((_, i) => `<span class="dot ${i===0?'active':''}" data-i="${i}"></span>`).join("");
+      // Try play video
+      if (reelVideo) {
+        try { await reelVideo.play(); }
+        catch { videoOk = false; }
+      }
+
+      // Try play music
+      if (bgMusic) {
+        try { await bgMusic.play(); }
+        catch { musicOk = false; }
+      }
+
+      const ok = videoOk && musicOk;
+
+      if (status) status.textContent = ok ? "Playing ❤️" : "Tap Play ▶";
+      if (playBtn) playBtn.style.display = ok ? "none" : "inline-flex";
+    };
+
+    if (playBtn) playBtn.addEventListener("click", playAll);
+    window.addEventListener("load", playAll);
   }
 
-  let idx = 0;
-  const setSlide = (i) => {
-    idx = i;
-    slides.forEach((s, k) => s.classList.toggle("active", k === idx));
-    const dots = document.querySelectorAll(".dot");
-    dots.forEach((d, k) => d.classList.toggle("active", k === idx));
-  };
+  // -------------------------
+  // NO PAGE: autoplay music after clicking NO
+  // -------------------------
+  const noMusic = document.getElementById("noMusic");
+  if (noMusic) {
+    const startNoMusic = async () => {
+      try { await noMusic.play(); }
+      catch { console.log("NO music autoplay blocked by browser."); }
+    };
 
-  if (slides.length) {
-    setInterval(() => setSlide((idx + 1) % slides.length), 3500);
-    document.addEventListener("click", (e) => {
-      const dot = e.target.closest(".dot");
-      if(dot) setSlide(Number(dot.dataset.i));
+    window.addEventListener("load", () => {
+      if (sessionStorage.getItem("playNoMusic") === "true") {
+        startNoMusic();
+        sessionStorage.removeItem("playNoMusic");
+      }
     });
   }
-
-  // Music
-  if (!audio) return;
-
-  const tryPlay = async () => {
-    try {
-      await audio.play();
-      if (status) status.textContent = "Playing ❤️";
-      if (playBtn) playBtn.style.display = "none";
-    } catch {
-      if (status) status.textContent = "Tap Play Music ▶";
-      if (playBtn) playBtn.style.display = "inline-flex";
-    }
-  };
-
-  if (playBtn) {
-    playBtn.addEventListener("click", tryPlay);
-  }
-
-  // If we came from a user click (Next), attempt play on load
-  window.addEventListener("load", () => {
-    // Try to auto-start (may be blocked)
-    tryPlay();
-  });
 })();
