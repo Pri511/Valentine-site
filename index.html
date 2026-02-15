@@ -3,18 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Valentine?</title>
+  <title>Noel, ethoo chinna oru suprise</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bg-hearts">
   <main class="center-wrap">
     <section class="card">
       <h1 class="title">Will you be my valentine? 💘</h1>
-      <p class="subtitle">Choose wisely 😌</p>
+      <p class="subtitle">Think before you choose</p>
 
       <div class="btn-row">
         <a class="btn btn-yes" href="message.html" aria-label="Yes">YES ✨</a>
-        <a class="btn btn-no" href="NO.html">NO</a>
+
+        <!-- ✅ this flag allows NO.html to autoplay music -->
+        <a class="btn btn-no" href="NO.html"
+           onclick="sessionStorage.setItem('playNoMusic','true')">
+          NO
+        </a>
       </div>
 
       <p class="tiny-hint" id="hint"></p>
@@ -23,5 +28,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>
